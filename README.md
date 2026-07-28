@@ -26,6 +26,22 @@ The tests are written in JavaScript and use reusable helpers, fixtures, and fact
 - **date-fns**: Dynamic date handling
 - **dotenv**: Environment variable management
 
+## Test Categories
+
+The test files are organized with descriptive `describe` blocks that group scenarios by purpose:
+
+- **Happy Path**: Valid flows for creating, retrieving, updating, and deleting bookings
+- **Authorization**: Missing or invalid token scenarios for protected endpoints
+- **Headers Validation**: `Accept` header behavior and response `Content-Type`
+- **Response Structure**: Expected response fields and nested properties
+- **Response Data Validation**: Data type and date format assertions
+- **Invalid Data Types**: Null values, invalid booleans, and malformed dates
+- **Business Rules**: Domain expectations such as checkout date after checkin date
+- **Invalid Booking ID**: Nonexistent, invalid, or zero booking IDs
+- **Special Characters**: Unicode and symbol handling in request fields
+- **Security Tests**: Script and SQL injection style payloads
+- **Idempotency**: Repeated update or delete operations and persisted state validation
+
 ## Test Coverage
 
 The current automated suite covers the main booking lifecycle:
@@ -40,44 +56,6 @@ The current automated suite covers the main booking lifecycle:
 | `POST /auth` | Token generation through the authentication helper |
 
 Some tests intentionally document defects or unexpected behavior from the public API, such as accepting invalid dates, accepting script-like strings, or returning status codes that differ from typical REST conventions.
-
-## How to Install
-
-Clone the repository and install the dependencies:
-
-```bash
-npm install
-```
-
-Create a `.env` file in the project root. You can use the available [env.example](./env.example) file as a reference for the required environment variables:
-
-```env
-BASE_URL=https://restful-booker.herokuapp.com
-USERNAME=your_username
-PASSWORD=your_password
-```
-
-The values shown in [env.example](./env.example) are examples only. Replace `USERNAME` and `PASSWORD` with your real credentials before running the tests.
-
-## How to Run Tests
-
-Run the complete test suite:
-
-```bash
-npm test
-```
-
-The test command executes all files that match:
-
-```text
-./test/**/*.test.js
-```
-
-Mochawesome is configured as the reporter. After execution, the HTML report is generated in:
-
-```text
-mochawesome-report/
-```
 
 ## Project Structure
 
@@ -121,6 +99,44 @@ Contains dynamic payload builders used to generate valid and customizable test d
 ### `fixtures/`
 
 Contains static test data, such as sample booking payloads. The project no longer relies on credential fixtures stored in this folder.
+
+## How to Install
+
+Clone the repository and install the dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env` file in the project root. You can use the available [env.example](./env.example) file as a reference for the required environment variables:
+
+```env
+BASE_URL=https://restful-booker.herokuapp.com
+USERNAME=your_username
+PASSWORD=your_password
+```
+
+The values shown in [env.example](./env.example) are examples only. Replace `USERNAME` and `PASSWORD` with your real credentials before running the tests.
+
+## How to Run Tests
+
+Run the complete test suite:
+
+```bash
+npm test
+```
+
+The test command executes all files that match:
+
+```text
+./test/**/*.test.js
+```
+
+Mochawesome is configured as the reporter. After execution, the HTML report is generated in:
+
+```text
+mochawesome-report/
+```
 
 ## Helpers Explanation
 
