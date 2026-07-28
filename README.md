@@ -15,48 +15,6 @@ This project was built to exercise the main REST operations available in the Res
 
 The tests are written in JavaScript and use reusable helpers, fixtures, and factories to keep the scenarios readable, maintainable, and easy to extend.
 
-## Technologies Used
-
-- **Node.js**: JavaScript runtime
-- **Mocha**: Test runner
-- **Chai**: Assertion library
-- **Supertest**: HTTP request library for API testing
-- **Mochawesome**: HTML test report generator
-- **Faker**: Dynamic test data generation
-- **date-fns**: Dynamic date handling
-- **dotenv**: Environment variable management
-
-## Test Categories
-
-The test files are organized with descriptive `describe` blocks that group scenarios by purpose:
-
-- **Happy Path**: Valid flows for creating, retrieving, updating, and deleting bookings
-- **Authorization**: Missing or invalid token scenarios for protected endpoints
-- **Headers Validation**: `Accept` header behavior and response `Content-Type`
-- **Response Structure**: Expected response fields and nested properties
-- **Response Data Validation**: Data type and date format assertions
-- **Invalid Data Types**: Null values, invalid booleans, and malformed dates
-- **Business Rules**: Domain expectations such as checkout date after checkin date
-- **Invalid Booking ID**: Nonexistent, invalid, or zero booking IDs
-- **Special Characters**: Unicode and symbol handling in request fields
-- **Security Tests**: Script and SQL injection style payloads
-- **Idempotency**: Repeated update or delete operations and persisted state validation
-
-## Test Coverage
-
-The current automated suite covers the main booking lifecycle:
-
-| Endpoint | Coverage |
-| --- | --- |
-| `POST /booking` | Booking creation, response body validation, headers, invalid data, business rules, special characters, and security payloads |
-| `GET /booking` | Booking list retrieval, booking retrieval by ID, response structure, data types, headers, and invalid IDs |
-| `PUT /booking/{id}` | Full booking update, authentication, headers, invalid data, business rules, invalid IDs, special characters, security payloads, and idempotency |
-| `PATCH /booking/{id}` | Partial field updates, authentication, headers, invalid data, business rules, invalid IDs, special characters, security payloads, and idempotency |
-| `DELETE /booking/{id}` | Successful deletion, authentication failures, invalid IDs, and repeated delete behavior |
-| `POST /auth` | Token generation through the authentication helper |
-
-Some tests intentionally document defects or unexpected behavior from the public API, such as accepting invalid dates, accepting script-like strings, or returning status codes that differ from typical REST conventions.
-
 ## Project Structure
 
 ```text
@@ -82,25 +40,27 @@ Some tests intentionally document defects or unexpected behavior from the public
 └── README.md
 ```
 
-## Folder Structure
+The repository is organized around four main areas:
 
-### `test/`
+- `test/`: automated API test specifications grouped by resource and operation.
+- `helpers/`: reusable utilities for authentication, booking setup, and date handling.
+- `factories/`: dynamic payload builders for test data generation.
+- `fixtures/`: static sample data used by the tests.
 
-Contains the automated test specifications organized by API resource. The current suite is focused on the `booking` resource and separates each HTTP operation into its own file.
+## Technologies Used
 
-### `helpers/`
+- **Node.js**: JavaScript runtime
+- **Mocha**: Test runner
+- **Chai**: Assertion library
+- **Supertest**: HTTP request library for API testing
+- **Mochawesome**: HTML test report generator
+- **Faker**: Dynamic test data generation
+- **date-fns**: Dynamic date handling
+- **dotenv**: Environment variable management
 
-Contains reusable functions that support test setup and API interactions.
+## Getting Started
 
-### `factories/`
-
-Contains dynamic payload builders used to generate valid and customizable test data.
-
-### `fixtures/`
-
-Contains static test data, such as sample booking payloads. The project no longer relies on credential fixtures stored in this folder.
-
-## How to Install
+### How to Install
 
 Clone the repository and install the dependencies:
 
@@ -118,7 +78,7 @@ PASSWORD=your_password
 
 The values shown in [env.example](./env.example) are examples only. Replace `USERNAME` and `PASSWORD` with your real credentials before running the tests.
 
-## How to Run Tests
+### How to Run Tests
 
 Run the complete test suite:
 
@@ -138,7 +98,42 @@ Mochawesome is configured as the reporter. After execution, the HTML report is g
 mochawesome-report/
 ```
 
-## Helpers Explanation
+## Test Suite Overview
+
+### Test Categories
+
+The test files are organized with descriptive `describe` blocks that group scenarios by purpose:
+
+- **Happy Path**: Valid flows for creating, retrieving, updating, and deleting bookings
+- **Authorization**: Missing or invalid token scenarios for protected endpoints
+- **Headers Validation**: `Accept` header behavior and response `Content-Type`
+- **Response Structure**: Expected response fields and nested properties
+- **Response Data Validation**: Data type and date format assertions
+- **Invalid Data Types**: Null values, invalid booleans, and malformed dates
+- **Business Rules**: Domain expectations such as checkout date after checkin date
+- **Invalid Booking ID**: Nonexistent, invalid, or zero booking IDs
+- **Special Characters**: Unicode and symbol handling in request fields
+- **Security Tests**: Script and SQL injection style payloads
+- **Idempotency**: Repeated update or delete operations and persisted state validation
+
+### Test Coverage
+
+The current automated suite covers the main booking lifecycle:
+
+| Endpoint | Coverage |
+| --- | --- |
+| `POST /booking` | Booking creation, response body validation, headers, invalid data, business rules, special characters, and security payloads |
+| `GET /booking` | Booking list retrieval, booking retrieval by ID, response structure, data types, headers, and invalid IDs |
+| `PUT /booking/{id}` | Full booking update, authentication, headers, invalid data, business rules, invalid IDs, special characters, security payloads, and idempotency |
+| `PATCH /booking/{id}` | Partial field updates, authentication, headers, invalid data, business rules, invalid IDs, special characters, security payloads, and idempotency |
+| `DELETE /booking/{id}` | Successful deletion, authentication failures, invalid IDs, and repeated delete behavior |
+| `POST /auth` | Token generation through the authentication helper |
+
+Some tests intentionally document defects or unexpected behavior from the public API, such as accepting invalid dates, accepting script-like strings, or returning status codes that differ from typical REST conventions.
+
+## Component Details
+
+### Helpers Explanation
 
 ### `helpers/authentication.js`
 
@@ -180,22 +175,6 @@ const booking = createBooking({
   }
 });
 ```
-
-## Test Categories
-
-The test files are organized with descriptive `describe` blocks that group scenarios by purpose:
-
-- **Happy Path**: Valid flows for creating, retrieving, updating, and deleting bookings
-- **Authorization**: Missing or invalid token scenarios for protected endpoints
-- **Headers Validation**: `Accept` header behavior and response `Content-Type`
-- **Response Structure**: Expected response fields and nested properties
-- **Response Data Validation**: Data type and date format assertions
-- **Invalid Data Types**: Null values, invalid booleans, and malformed dates
-- **Business Rules**: Domain expectations such as checkout date after checkin date
-- **Invalid Booking ID**: Nonexistent, invalid, or zero booking IDs
-- **Special Characters**: Unicode and symbol handling in request fields
-- **Security Tests**: Script and SQL injection style payloads
-- **Idempotency**: Repeated update or delete operations and persisted state validation
 
 ## Improvements for the Future
 
