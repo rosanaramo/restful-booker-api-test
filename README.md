@@ -26,31 +26,6 @@ The tests are written in JavaScript and use reusable helpers, fixtures, and fact
 - **date-fns**: Dynamic date handling
 - **dotenv**: Environment variable management
 
-## Project Structure
-
-```text
-.
-├── factories/
-│   └── bookingFactory.js
-├── fixtures/
-│   └── booking.json
-├── helpers/
-│   ├── addBooking.js
-│   ├── authentication.js
-│   ├── datesHelper.js
-│   └── getBooking.js
-├── test/
-│   └── booking/
-│       ├── delete-booking.test.js
-│       ├── get-booking.test.js
-│       ├── patch-booking.test.js
-│       ├── post-booking.test.js
-│       └── put-booking.test.js
-├── package.json
-├── package-lock.json
-└── README.md
-```
-
 ## Test Coverage
 
 The current automated suite covers the main booking lifecycle:
@@ -102,6 +77,31 @@ Mochawesome is configured as the reporter. After execution, the HTML report is g
 
 ```text
 mochawesome-report/
+```
+
+## Project Structure
+
+```text
+.
+├── factories/
+│   └── bookingFactory.js
+├── fixtures/
+│   └── booking.json
+├── helpers/
+│   ├── addBooking.js
+│   ├── authentication.js
+│   ├── datesHelper.js
+│   └── getBooking.js
+├── test/
+│   └── booking/
+│       ├── delete-booking.test.js
+│       ├── get-booking.test.js
+│       ├── patch-booking.test.js
+│       ├── post-booking.test.js
+│       └── put-booking.test.js
+├── package.json
+├── package-lock.json
+└── README.md
 ```
 
 ## Folder Structure
