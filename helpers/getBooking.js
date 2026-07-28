@@ -1,16 +1,14 @@
-const request = require('supertest')
-require('dotenv').config()
+const request = require("supertest");
+require("dotenv").config();
 
-
-const getBooking = async(bookingId) =>{
-
-    const response = await request(process.env.BASE_URL)
+const getBooking = async (bookingId) => {
+  const response = await request(process.env.BASE_URL)
     .get(`/booking/${bookingId}`)
-    .set('Accept', 'application/json')
+    .set("Accept", "application/json");
 
-    return response;
-}
+  return response;
+};
 
 module.exports = {
-    getBooking
-}
+  getBooking,
+};
