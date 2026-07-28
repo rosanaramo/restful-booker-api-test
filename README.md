@@ -33,8 +33,7 @@ The tests are written in JavaScript and use reusable helpers, fixtures, and fact
 ├── factories/
 │   └── bookingFactory.js
 ├── fixtures/
-│   ├── booking.json
-│   └── credentials.json
+│   └── booking.json
 ├── helpers/
 │   ├── addBooking.js
 │   ├── authentication.js
@@ -79,13 +78,11 @@ Create a `.env` file in the project root. You can use the available [env.example
 
 ```env
 BASE_URL=https://restful-booker.herokuapp.com
+USERNAME=your_username
+PASSWORD=your_password
 ```
 
-Authentication credentials are stored in:
-
-```text
-fixtures/credentials.json
-```
+The values shown in [env.example](./env.example) are examples only. Replace `USERNAME` and `PASSWORD` with your real credentials before running the tests.
 
 ## How to Run Tests
 
@@ -123,13 +120,13 @@ Contains dynamic payload builders used to generate valid and customizable test d
 
 ### `fixtures/`
 
-Contains static test data, such as authentication credentials and sample booking payloads.
+Contains static test data, such as sample booking payloads. The project no longer relies on credential fixtures stored in this folder.
 
 ## Helpers Explanation
 
 ### `helpers/authentication.js`
 
-Generates an authentication token by calling `POST /auth` with the credentials from `fixtures/credentials.json`. The token is used by protected operations such as `PUT`, `PATCH`, and `DELETE`.
+Generates an authentication token by calling `POST /auth` with the `USERNAME` and `PASSWORD` values from your environment configuration. The token is used by protected operations such as `PUT`, `PATCH`, and `DELETE`.
 
 ### `helpers/addBooking.js`
 
